@@ -75,18 +75,18 @@ function makeDraggable({ target }) {
 document.addEventListener('DOMContentLoaded', () => {
   document
     .getElementById('submitButton')
-    .addEventListener("click", () => {
-      const text = document.getElementById("inputText").value;
-      const displayArea = document.getElementById("displayText");
+    .addEventListener('click', () => {
+      const text = document.getElementById('inputText').value;
+      const displayArea = document.getElementById('displayText');
 
-      document.getElementById("inputText").value = '';
-      displayArea.innerHTML = "";
+      document.getElementById('inputText').value = '';
+      displayArea.innerHTML = '';
 
       text.split('').forEach((char) => {
-        const span = document.createElement("span");
+        const span = document.createElement('span');
         span.textContent = char;
-        span.classList.add("draggable");
-        span.style.position = "relative";
+        span.classList.add('draggable');
+        span.style.position = 'relative';
         displayArea.appendChild(span);
         span.addEventListener('click', makeDraggable)
       });
