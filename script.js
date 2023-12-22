@@ -37,13 +37,14 @@ function isOverlapping(elem1, elem2) {
 function findOverlappedElement(currentElement) {
   let selectedElement = null;
 
-  document.querySelectorAll('.draggable')
-    .forEach((element) => {
-      if (element !== currentElement && isOverlapping(currentElement, element)) {
-        selectedElement = element;
-        selectedElement.style.position = 'absolute';
-      }
+  selectedElement = [...document.querySelectorAll('.draggable')]
+    .find((element) => {
+      return element !== currentElement && isOverlapping(currentElement, element)
     });
+
+    if (selectedElement) {
+      selectedElement.style.position = 'absolute';
+    }
   
   return selectedElement;
 }
@@ -82,11 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('inputText').value = '';
       displayArea.innerHTML = '';
 
-      text.split('').forEach((char) => {
+      text.split('').forEach((char, index) => {
         const span = document.createElement('span');
         span.textContent = char;
         span.classList.add('draggable');
-        span.style.position = 'relative';
+        span.style.position = 'absolute';
+        span.style.left = `${index * 20}px`;
         displayArea.appendChild(span);
         span.addEventListener('click', makeDraggable)
       });
